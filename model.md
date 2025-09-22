@@ -5,12 +5,14 @@
 
 ### Поля:
 
-*   **`id`** (integer, primary key)
+*   **`id`** (uuid, primary key)
     *   Уникальный идентификатор задачи.
 *   **`title`** (string, 255)
     *   Название задачи.
 *   **`description`** (text)
     *   Подробное описание задачи.
+*   **`priority`** (integer)
+    *   Приоритет задачи.
 *   **`created_at`** (datetime)
     *   Дата и время создания задачи (устанавливается автоматически).
 *   **`updated_at`** (datetime)
@@ -21,7 +23,7 @@
     *   Закончить обязательно до
 *   **`starts_at`** (datetime, nullable)
     *   Приступить не раньше чем
-*   **`recurrence_rules_id`** (integer, FOREIGN KEY to `recurrence_rules.id`)
+*   **`recurrence_rules_id`** (uuid, FOREIGN KEY to `recurrence_rules.id`)
     *   Правило повторения
 
 ## Модель `tags`
@@ -29,16 +31,16 @@
 
 ### Поля:
 
-*   **`id`** (integer, primary key)
+*   **`id`** (uuid, primary key)
     *   Уникальный идентификатор тега.
 *   **`name`** (string, 255, unique)
     *   Уникальное имя тега.
 
-## Связующая таблица `task_tags`
-Для реализации связи "многие-ко-многим" между `task` и `tag` создается таблица `task_tags` со следующими полями:
+## Связующая таблица `task_tag`
+Для реализации связи "многие-ко-многим" между `task` и `tag` создается таблица `task_tag` со следующими полями:
 
-*   `task_id` (integer, FOREIGN KEY to `tasks.id`)
-*   `tag_id` (integer, FOREIGN KEY to `tags.id`)
+*   `task_id` (uuid, FOREIGN KEY to `tasks.id`)
+*   `tag_id` (uuid, FOREIGN KEY to `tags.id`)
 *   **Составной первичный ключ:** (`task_id`, `tag_id`)
 
 ## Модель `recurrence_rules`
@@ -46,7 +48,7 @@
 
 ### Поля:
 
-*   **`id`** (integer, primary key)
+*   **`id`** (uuid, primary key)
     *   Уникальный идентификатор правила.
 *   **`recurrence_type`** (enum: 'daily', 'weekly', 'monthly')
     *   Тип повторения.

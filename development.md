@@ -67,3 +67,19 @@
 *   **`DELETE /api/tags/:tagId`** - Удаление тега по ID.
     *   **Параметр:** `tagId` (integer) - ID тега.
     *   **Успешный ответ:** `200 OK` - сообщение "delete success!".
+
+### Эндпоинты для Правил повторения:
+
+*   **`POST /api/recurrence-rules`** - Создание или получение существующего правила повторения, с привязкой к задаче
+* возможные значения recurrenceType: daily, weekly, monthly
+    *   **Тело запроса (JSON):**
+        ```json
+        {
+            "taskId": "some_uuid",
+            "recurrenceType": "daily",
+            "interval": 1,
+            "daysOfWeek": 0,
+            "daysOfMonth": 0
+        }
+        ```
+    *   **Успешный ответ:** `200 OK` - объект созданного или существующего правила повторения.
